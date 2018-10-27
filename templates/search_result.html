@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>HackProduct: Trending</title>
+        <title>HackProduct: Search Result</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#204584">
         <style>
@@ -77,6 +77,7 @@
               border-radius: 10px;
               left: -5px;
             }
+
             .title-tags.red-tag {
               display : inline-block;
               background-color: rgb(226, 43, 43);
@@ -86,7 +87,6 @@
               margin: 5px 3px;
               border-radius: 10px;
             }
-
 
            .title-tags.green-tag {
               display : inline-block;
@@ -332,8 +332,8 @@
               <a href="javascript:void(0)" onclick="document.querySelector('#overlay').style.display = 'flex';" class="blue-background">Menu</a>
             </div>
         </div>
-        <div style="margin: 25px 35px 0px 35px; color: blue;"><i class="fas fa-angle-up"></i>
-&nbsp;&nbsp;&nbsp;TRENDING</div>
+        <div style="margin: 25px 35px 0px 35px; color: blue;"><i class="fas fa-search"></i>
+&nbsp;&nbsp;&nbsp;SEARCH RESULT</div>
         <div id="trending">
          <!-- <div class="news-article">
             <div class="media-house">
@@ -371,7 +371,7 @@
             </div>
           </div>-->
           {% set count = [0] %}
-          {% for article in var[2:] %}
+          {% for article in var %}
           <div class="news-article">
               <div class="media-house">
                 <a href="/mediahouse/{{ article[4] }}" style="text-decoration: underline;">{{ article[-1] }}</a>
@@ -431,7 +431,7 @@
           {% endfor %}
 
           <div id="overlay" class="white-overlay" style="">
-            <a herf="/">Latest</a>
+            <a href="{{ url_for('trending') }}">Latest</a>
             <a href="/analyse">Analyse by URL</a>
             <a>Media Houses</a>
             <a>Politicians</a>

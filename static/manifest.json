@@ -1,6 +1,6 @@
 {
-    "name": "Hello World PWA",
-    "short_name": "Hi",
+    "name": "HackProduct",
+    "short_name": "HackProduct",
     "start_url": "/",
     "icons": [{
     "src": "img/icon.png",
@@ -8,6 +8,6 @@
     "type": "image/png"
   }],
     "display": "standalone",
-    "background_color": "#FF9800",
-    "theme_color": "#FF9800"
+    "background_color": "#204584",
+    "theme_color": "#204584"
   }

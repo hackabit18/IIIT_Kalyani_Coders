@@ -392,12 +392,17 @@
                   Trusted
               </div>
               <div class="contains">Contains</div>
-              <div class="greyblue-tag">
-                Narendra Modi
-              </div>
-              <div class="greyblue-tag">
-                  Rahul Gandhi
-              </div>
+              {% if contains|length > 0 %}
+                {% for person in contains %}
+                <div class="greyblue-tag">
+                  {{ person }}
+                </div>
+                {% endfor %}
+              {% else %}
+                <div class="greyblue-tag">
+                  No Named Entity
+                </div>
+              {% endif %}
             </div>
             </form>
         </div>
