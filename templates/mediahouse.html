@@ -13,6 +13,7 @@
             
             a {
               text-decoration: none;
+              color: inherit;
             }
             
             #header {
@@ -305,54 +306,53 @@
             </div>
         </div>
         <div id="lightblueblock">
-          <div id="mediahouse-name">Indian Express</div>
+          <div id="mediahouse-name"><a href="{{ mhurl }}" style="text-decoration: underline;">{{ mhname }}</a></div>
+          After analysing <b style="color: blue">{{ article_count }}</b> news articles from <b style="color: blue"><a href="{{ mhurl }}" style="text-decoration: underline;">{{ mhname }}</a></b>. We have found that, {{ mhname }} is
           <div class="group">
             <div class="subgroupheading">Likely to be positive for</div>
+            {% if positivefor|length > 0 %}
+            {% for pol in positivefor %}
             <div class="greyblue-tag">
-                Narendra Modi
+                {{ pol[1] }}&nbsp;<b>{{ pol[2] }}%</b>
             </div>
-            <div class="greyblue-tag" >
-                Narendra Modi
-            </div>
+            {% endfor %}
+            {% else %}
             <div class="greyblue-tag">
-                  Narendra Modi
+              Empty
             </div>
-            <div class="greyblue-tag">
-                Narendra Modi
-            </div>
+            {% endif %}
           </div>
           <div class="group">
               <div class="subgroupheading">Likely to be negative for</div>
+              {% if negativefor|length > 0 %}
+              {% for pol in negativefor %}
               <div class="greyblue-tag">
-                  Narendra Modi
+                  {{ pol[1] }}&nbsp;<b>{{ pol[2] }}%</b>
               </div>
-              <div class="greyblue-tag" >
-                  Narendra Modi
-              </div>
+              {% endfor %}
+              {% else %}
               <div class="greyblue-tag">
-                    Narendra Modi
+                Empty
               </div>
-              <div class="greyblue-tag">
-                  Narendra Modi
-              </div>
+              {% endif %}
           </div>
           <div class="group">
               <div class="subgroupheading">Insufficient data for</div>
+              {% if insufficientfor|length > 0 %}
+              {% for pol in insufficientfor %}
               <div class="greyblue-tag">
-                  Narendra Modi
+                  {{ pol[1] }}
               </div>
-              <div class="greyblue-tag" >
-                  Narendra Modi
-              </div>
+              {% endfor %}
+              {% else %}
               <div class="greyblue-tag">
-                    Narendra Modi
+                Empty
               </div>
-              <div class="greyblue-tag">
-                  Narendra Modi
-              </div>
+              {% endif %}
           </div>
+          <a style="display: block; margin: 15px 0px; text-decoration: underline; color:black;" href="#">Show news articles by {{ mhname }}.</a>
         </div>
- 
+
         </div>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">

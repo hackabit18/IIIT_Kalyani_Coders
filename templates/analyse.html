@@ -1,0 +1,344 @@
+<!doctype html>
+<html>
+    <head>
+        <title>HackProduct: Trending</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#204584">
+        <style>
+            body, html {
+                margin: 0px;
+                padding: 0px;
+                font-family: 'Roboto';
+            }
+            
+            a {
+              text-decoration: none;
+              color: inherit;
+            }
+            
+            #header {
+              top: 0px;
+              width: 100%;
+              height: 60px;
+              padding: 0 30px;
+              background: white;
+              border-bottom: 1px solid#ebecf0;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: space-between;
+              z-index: 999;
+              box-sizing: border-box;
+            }
+
+            #header .nav a.blue-background {
+              background-color: #204584;
+              color: white;
+              border-radius: 15px;
+              padding: 5px 15px;
+              margin-left: 20px;
+            }
+
+            #trending {
+              width: 100%;
+              box-sizing: border-box;
+              padding: 10px;
+            }
+
+            .news-article {
+              box-sizing: border-box;
+              background-color: #f6f6fa;
+              margin: 20px;
+              padding: 25px 20px;
+            }
+
+            .media-house {
+              color : blue;
+              font-size: 16px;
+            }
+
+            .title {
+              margin: 8px 0px;
+              font-weight: bold;
+            }
+
+            .title a{
+              text-decoration: underline;
+              color : rgb(14, 14, 14);
+            }
+
+            .title-tags.red-tag::before{
+              content: "Title";
+              position: relative;
+              background-color: darkred;
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
+            .title-tags.red-tag {
+              display : inline-block;
+              background-color: rgb(226, 43, 43);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+
+           .title-tags.green-tag {
+              display : inline-block;
+              background-color: rgb(39, 187, 46);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .title-tags.green-tag::before{
+              content: "Title";
+              position: relative;
+              background-color: rgb(15, 158, 22);
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
+
+            .title-tags.blue-tag {
+              display : inline-block;
+              background-color: rgb(105, 76, 233);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .title-tags.blue-tag::before{
+              content: "Title";
+              position: relative;
+              background-color: rgb(64, 33, 201);
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
+
+            .content-tags.blue-tag {
+              display : inline-block;
+              background-color: rgb(105, 76, 233);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .content-tags.blue-tag::before{
+              content: "Content";
+              position: relative;
+              background-color: rgb(64, 33, 201);
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
+
+            .content-tags.red-tag::before{
+              content: "Content";
+              position: relative;
+              background-color: darkred;
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
+            .content-tags.red-tag {
+              display : inline-block;
+              background-color: rgb(226, 43, 43);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+           .content-tags.green-tag {
+              display : inline-block;
+              background-color: rgb(39, 187, 46);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .content-tags.green-tag::before{
+              content: "Content";
+              position: relative;
+              background-color: rgb(15, 158, 22);
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
+
+            .sent-tags.red-tag {
+              display : inline-block;
+              background-color: rgb(226, 43, 43);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .sent-tags.red-tag::before{
+              content: "Sentiment";
+              position: relative;
+              background-color: darkred;
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
+
+           .sent-tags.green-tag {
+              display : inline-block;
+              background-color: rgb(39, 187, 46);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .sent-tags.green-tag::before{
+              content: "Sentiment";
+              position: relative;
+              background-color: rgb(15, 158, 22);
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
+
+            .red-tag {
+              display : inline-block;
+              background-color: rgb(226, 43, 43);
+              padding: 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+            .blue-tag {
+              display : inline-block;
+              background-color: rgb(64, 33, 201);
+              padding: 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+            .green-tag {
+              display : inline-block;
+              background-color: rgb(39, 187, 46);
+              padding: 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .greyblue-tag {
+              display : inline-block;
+              background-color: rgb(231, 231, 227);
+              padding: 4px 12px;
+              color: rgb(49, 47, 47);
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .contains {
+              color: grey;
+              margin: 15px 3px;
+            }
+
+            #lightblueblock {
+              box-sizing: border-box;
+              background-color: #f6f6fa;
+              margin: 20px 30px;
+              padding: 25px 20px;
+            }
+
+            #mediahouse-name {
+              color: blue;
+              font-size: 18px;
+              text-align: center;
+              margin-bottom: 25px;
+            }
+
+            .subgroupheading {
+              margin: 25px 0px 15px 0px;
+            }
+
+            .textbox {
+              margin: 8px 0px;
+              padding: 15px;
+              border: 1px solid #e9e9e9;
+              outline: none;
+              font-size : 15px;
+              color: rgb(5, 5, 56);
+              font-family: 'Roboto', sans-serif;
+              border-radius: 6px;
+            }
+            .textbox:focus {
+              border: 1px solid rgba(28, 66, 126, 0.342);
+            }
+            
+            .button {
+              border-radius: 6px;
+              background-color: rgb(20, 45, 84);
+              padding: 10px 15px;
+              outline : none;
+              color: white;
+              border: none;
+              font-family: 'Roboto', sans-serif;
+              font-size: 16px; font-weight: 300;
+              border: 1px solid rgb(24, 46, 82);
+            }
+            .button:active {
+              background-color: rgb(73, 89, 117);
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo-holder">
+              <div id="logo" style="height:50px; display: flex; align-items: center;">
+                <img src="../static/img/logo.png" style="height: 90%; width: auto;">
+              </div>
+            </div>
+      
+          <div id="nav-mobile" class="nav">
+              <a href="javascript:void(0)" onclick="$('#mobile-menu').css('display','flex')" class="blue-background">Menu</a>
+            </div>
+        </div>
+        <div id="lightblueblock">
+            <div style="color: blue; margin: 25px auto; text-align: center;">Analyse any news article on the web.</div>
+            <form id="frm_analyse" method="post" action="/analyse/" style="display: flex; flex-direction: column; align-items: center; justify-content: center;" >
+                <input class="textbox" type="text" name="url" placeholder="URL to the news article" style="width:90%"><br>
+                <input class="button" type="submit" style="width: 100px" value="Analyse">
+            </form>
+        </div>
