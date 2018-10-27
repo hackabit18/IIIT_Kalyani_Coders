@@ -5,7 +5,7 @@ from pprint import pprint
 
 conn = sqlite3.connect("db.sqlite")
 c = conn.cursor()
-c.execute("CREATE TABLE `articles` ( `article_id` INT NOT NULL , `url` VARCHAR(400) NOT NULL , `title` VARCHAR(1000) NOT NULL , `content` TEXT NOT NULL , PRIMARY KEY (`article_id`));")
+#c.execute("CREATE TABLE `articles` ( `article_id` INT NOT NULL , `url` VARCHAR(400) NOT NULL , `title` VARCHAR(1000) NOT NULL , `content` TEXT NOT NULL , PRIMARY KEY (`article_id`));")
 
 
 with open("news.json", "r") as f:
@@ -16,10 +16,10 @@ for article in data["articles"]:
     c.execute("INSERT INTO `articles` VALUES (?, ?, ?, ?)", (aid, article['url'], article['title'], article['content']))
     aid += 1
 
-c.execute("""
+'''c.execute("""
 CREATE TABLE `fakebox` 
 ( `article_id` INT NOT NULL , `dtitle` VARCHAR(100) NOT NULL , `stitle` DECIMAL(1000) NOT NULL , `dcontent` VARCHAR(100) NOT NULL , `scontent` DECIMAL NOT NULL , PRIMARY KEY (`article_id`)); 
-""")
+""")'''
 
 aid = 0
 print("Perfoming FakeBox Analysis")

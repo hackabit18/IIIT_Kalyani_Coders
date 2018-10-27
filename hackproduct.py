@@ -16,7 +16,14 @@ def trending():
     c = conn.cursor()
     c.execute('SELECT `articles`.*, `fakebox`.`dtitle`, `fakebox`.`dcontent`, `mediahouse`.`mhname` \
     from `articles`, `fakebox`, `mediahouse` WHERE `articles`.`article_id` = `fakebox`.`article_id` AND `articles`.`mhid` = `mediahouse`.`mhid`;')
-    return render_template('trending.html', var = c.fetchall())
+    articles = c.fetchall()
+    contains_list = []
+    for article in articles:
+        c.execute('SELECT `sentiments`.`pid`, `politicians`.`pname` FROM `sentiments`, `politicians` WHERE `sentiments`.`article_id`=%d AND `sentiments`.`pid` = `politicians`.`pid`;' %
+        article[0])
+        contains_list.append(c.fetchall())
+
+    return render_template('trending.html', var = articles , contains = contains_list)
 
 @app.route('/mediahouse/<int:mhid>')
 def mediahouse(mhid):

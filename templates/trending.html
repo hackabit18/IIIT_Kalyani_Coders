@@ -4,7 +4,6 @@
         <title>HackProduct: Trending</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#204584">
-        <link rel="manifest" href="/static/manifest.json">
         <style>
             body, html {
                 margin: 0px;
@@ -294,8 +293,32 @@
               border-radius: 10px;
               left: -5px;
             }
-        </style>
 
+            .white-overlay {
+              position: fixed; 
+              top: 0px; left: 0px; 
+              width: 100%; height: 100%; 
+              background-color: white; 
+              z-index: 1000;
+              display: none;
+              flex-direction : column;
+              justify-content: center;
+              align-items: center;
+              font-weight: bold;
+            }
+
+            .white-overlay a {
+              margin: 10px 0px;
+              padding: 5px 10px;
+              border-radius: 15px;
+            }
+
+            .white-overlay a:hover {
+              background-color: #ebecf0;
+            }
+
+        </style>
+    <link rel="manifest" href="/static/manifest.json">
     </head>
     <body>
         <div id="header">
@@ -306,7 +329,7 @@
             </div>
       
           <div id="nav-mobile" class="nav">
-              <a href="javascript:void(0)" onclick="$('#mobile-menu').css('display','flex')" class="blue-background">Menu</a>
+              <a href="javascript:void(0)" onclick="document.querySelector('#overlay').style.display = 'flex';" class="blue-background">Menu</a>
             </div>
         </div>
         <div style="margin: 25px 35px 0px 35px; color: blue;"><i class="fas fa-angle-up"></i>
@@ -347,6 +370,7 @@
                 Biased
             </div>
           </div>-->
+          {% set count = [0] %}
           {% for article in var %}
           <div class="news-article">
               <div class="media-house">
@@ -385,14 +409,36 @@
                 Trusted
               </div>
               <div class="contains">Contains</div>
-              <div class="greyblue-tag">
+              {% if contains[count[0]]|length > 0 %}
+              {% for c in contains[count[0]] %}
+                <div class="greyblue-tag">
+                  {{ c[1] }}
+                </div>
+              {% endfor %}
+              {% else %}
+                <div class="greyblue-tag">
+                  No Named Entity
+                </div>
+              {% endif %}
+              {% if count.append(count.pop() + 1) %}{% endif %}
+          <!--   <div class="greyblue-tag">
                 Narendra Modi
               </div>
               <div class="greyblue-tag">
                   Rahul Gandhi
-              </div>
+              </div>-->
             </div>
           {% endfor %}
+
+          <div id="overlay" class="white-overlay" style="">
+            <a>Latest</a>
+            <a>Analyse by URL</a>
+            <a>Media Houses</a>
+            <a>Politicians</a>
+            <a>Search</a>
+            <a style="background: #204584; color: white;" href="javascript:void(0)" onclick="document.querySelector('#overlay').style.display = 'none';">Close</a>
+
+          </div>
         </div>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
