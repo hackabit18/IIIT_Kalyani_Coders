@@ -1,5 +1,6 @@
 from requests_html import HTMLSession
 from pprint import pprint
+'''
 session = HTMLSession()
 
 url = input()
@@ -13,8 +14,23 @@ title = span.text
 content_div = r.html.find("[itemprop=articleBody]")[0]
 content = content_div.text
 
-pprint({
-    "url" : url,
-    "title" : title,
-    "content" : content
-})
+pprint()'''
+
+def extractor(url):
+    if not url.startswith('https://www.ndtv.com/'):
+        return None
+        
+    session = HTMLSession()
+    r = session.get(url)
+
+    span = r.html.find("div.ins_headline span")[0]
+    title = span.text
+
+    content_div = r.html.find("[itemprop=articleBody]")[0]
+    content = content_div.text
+
+    return {
+        "url" : url,
+        "title" : title,
+        "content" : content
+    }

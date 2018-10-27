@@ -4,6 +4,7 @@
         <title>HackProduct: Trending</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="theme-color" content="#204584">
+        <link rel="manifest" href="/static/manifest.json">
         <style>
             body, html {
                 margin: 0px;
@@ -13,6 +14,7 @@
             
             a {
               text-decoration: none;
+              color: inherit;
             }
             
             #header {
@@ -271,6 +273,27 @@
               color: grey;
               margin: 15px 3px;
             }
+
+            .domain-tags.green-tag {
+              display : inline-block;
+              background-color: rgb(39, 187, 46);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .domain-tags.green-tag::before{
+              content: "Domain";
+              position: relative;
+              background-color: rgb(15, 158, 22);
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
         </style>
 
     </head>
@@ -327,7 +350,7 @@
           {% for article in var %}
           <div class="news-article">
               <div class="media-house">
-                {{ article[-1] }}
+                <a href="/mediahouse/{{ article[4] }}" style="text-decoration: underline;">{{ article[-1] }}</a>
               </div>
               <div class="title">
                 <a href="{{ article[1] }}">{{ article[2] }}</a>
@@ -358,7 +381,9 @@
                   Unsure
               </div>
               {% endif %}
-
+              <div class="domain-tags green-tag">
+                Trusted
+              </div>
               <div class="contains">Contains</div>
               <div class="greyblue-tag">
                 Narendra Modi

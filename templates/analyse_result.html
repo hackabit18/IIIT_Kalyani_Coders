@@ -320,6 +320,26 @@
               background-color: rgb(73, 89, 117);
             }
 
+            .domain-tags.green-tag {
+              display : inline-block;
+              background-color: rgb(39, 187, 46);
+              //padding: 4px 12px;
+              padding: 4px 12px 4px 0px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+            }
+
+            .domain-tags.green-tag::before{
+              content: "Domain";
+              position: relative;
+              background-color: rgb(15, 158, 22);
+              padding: 4px 12px 4px 12px;
+              color: white;
+              margin: 5px 3px;
+              border-radius: 10px;
+              left: -5px;
+            }
         </style>
 
     </head>
@@ -336,9 +356,48 @@
             </div>
         </div>
         <div id="lightblueblock">
-            <div style="color: blue; margin: 25px auto; text-align: center;">Analyse any news article on the web.</div>
-            <form id="frm_analyse" method="post" action="/do-analysis" style="display: flex; flex-direction: column; align-items: center; justify-content: center;" >
-                <input class="textbox" type="text" name="url" placeholder="URL to the news article" style="width:90%"><br>
-                <input class="button" type="submit" style="width: 100px" value="Analyse">
+            <div class="media-house">
+              NDTV
+            </div>
+            <div class="title">
+                <a href="{{ url }}">{{ title }}</a>
+              </div>
+              {% if dtitle == 'bias'%}
+              <div class="title-tags red-tag">
+                Biased
+              </div>
+              {% elif dtitle == 'impartial' %}
+              <div class="title-tags green-tag">
+                  Impartial
+              </div>
+              {% else %}
+              <div class="title-tags blue-tag">
+                  Unsure
+              </div>
+              {% endif %}
+              {% if dcontent == 'bias'%}
+              <div class="content-tags red-tag">
+                Biased
+              </div>
+              {% elif dcontent == 'impartial' %}
+              <div class="content-tags green-tag">
+                  Impartial
+              </div>
+              {% else %}
+              <div class="content-tags blue-tag">
+                  Unsure
+              </div>
+              {% endif %}
+              <div class="domain-tags green-tag">
+                  Trusted
+              </div>
+              <div class="contains">Contains</div>
+              <div class="greyblue-tag">
+                Narendra Modi
+              </div>
+              <div class="greyblue-tag">
+                  Rahul Gandhi
+              </div>
+            </div>
             </form>
         </div>

@@ -1,7 +1,14 @@
 import sqlite3
 from flask import Flask
-from flask import render_template
+from flask import render_template, request, redirect, url_for
+from extractor import extractor
+import requests
+import json
 app = Flask(__name__)
+
+@app.route('/manifest.json') 
+def manifest():
+	return redirect(url_for('static', filename='manifest.json'))
 
 @app.route('/')
 def trending():
@@ -45,5 +52,23 @@ def mediahouse(mhid):
     #return str(positivefor) + "\n\n" + str(negativefor) + "\n\n" + str(insufficientfor)
     return render_template("mediahouse.html", positivefor = positivefor, negativefor = negativefor, insufficientfor = insufficientfor
     , mhname = mhname, mhurl = mhurl,  article_count =  article_count)
+
+
+@app.route('/analyse')
+def analyse():
+    return render_template('analyse.html')
+
+@app.route('/do-analysis', methods=['POST'])
+def do_analysis():
+    data = extractor(request.form['url'])
+    if data:
+        r = requests.post("http://localhost:8080/fakebox/check", data={
+            "url" : data['url'],
+            "title": data['title'],
+	        "content": data['content']
+        })
+        j = json.loads(r.text)
+        return render_template('analyse_result.html', url = request.form['url'], title = data['title'],  dtitle = j['title']["decision"], dcontent = j['content']["decision"])
+    return 'ERROR : URL Not Supported!'
 
 app.run(host="0.0.0.0", debug=True)
