@@ -4,6 +4,7 @@ from flask import render_template, request, redirect, url_for
 from extractor import extractor
 import requests
 import json
+from math import inf
 app = Flask(__name__)
 
 @app.route('/manifest.json') 
@@ -104,18 +105,68 @@ def do_search():
     c = conn.cursor()
     #c.execute('SELECT * from `articles` WHERE title LIKE %%%s%%' % request.form['term'])
     #data = c.fetchall()
-    c.execute('SELECT `articles`.*, `fakebox`.`dtitle`, `fakebox`.`dcontent`, `mediahouse`.`mhname` \
-    from `articles`, `fakebox`, `mediahouse` WHERE LOWER(`articles`.`title`) LIKE \'%%%s%%\' AND `articles`.`article_id` = `fakebox`.`article_id` AND `articles`.`mhid` = `mediahouse`.`mhid`;' % request.form['term'].lower() )
+    c.execute('SELECT `articles`.*, `fakebox`.`dtitle`, `fakebox`.`dcontent`, `mediahouse`.`mhname`, `sentiments`.`sentscore` \
+    from `articles`, `fakebox`, `mediahouse`, `sentiments` WHERE LOWER(`articles`.`title`) LIKE \'%%%s%%\' AND `articles`.`article_id` = `fakebox`.`article_id` AND `articles`.`mhid` = `mediahouse`.`mhid` AND `articles`.`article_id` = `sentiments`.`article_id` AND `sentiments`.`pid` = 0;' % request.form['term'].lower() )
 
     #c.execute('SELECT `articles`.`article_id`, `articles`.`url`, `articles`.`title`, `articles`.`mhid`, `fakebox`.`dtitle`, `fakebox`.`dcontent`, `mediahouse`.`mhname` \
     #from `articles`, `fakebox`, `mediahouse` WHERE LOWER(`articles`.`title`) LIKE \'%%%s%%\' AND `articles`.`article_id` = `fakebox`.`article_id` AND `articles`.`mhid` = `mediahouse`.`mhid`;' % request.form['term'] )
     articles = c.fetchall()
+    most_negative = +inf
+    most_negative_url = None
+    most_negative_name = None
+
+    most_positive = -inf
+    most_positive_url = None
+    most_positive_name = None
+    
+    for article in articles:
+        sentiment = article[-1]
+        if article[5]=='bias' or article[6]=='bias':
+            if sentiment < most_negative:
+                most_negative = sentiment
+                most_negative_url = article[1]
+                most_negative_name = article[2]
+            if sentiment > most_positive:
+                most_positive = sentiment
+                most_positive_url = article[1]
+                most_positive_name = article[2]
+
+    #return str(most_negative_aid) + " " + str(most_positive_aid)     
+
+    '''
+    if most_negative > 0.05:
+       most_negative_url = None
+
+    if most_positive < 0.05:
+        most_positive_url = None'''
+   
+    ''' for article in articles:
+        best_pairing = None
+        c.execute("SELECT `sentscore` FROM `sentiments` WHERE article_id=? AND pid=0", article[0])
+        sentiment = c.fetchall()[0][2]
+        if sentiment >= 0.05:
+            category = '+'
+        else
+            category = '-'
+    '''    
+    '''for i, article2 in enumerate(aritcles):
+            c.execute("SELECT `sentscore` FROM `sentiments` WHERE article_id=? AND pid=0", article2[0])
+            sentiment = c.fetchall()[0][2]
+            if sentiment >= 0.05:
+                category = '+'
+            else
+                category = '-'
+    '''    
+            
+            
+
     contains_list = []
     for article in articles:
         c.execute('SELECT `sentiments`.`pid`, `politicians`.`pname` FROM `sentiments`, `politicians` WHERE `sentiments`.`article_id`=%d AND `sentiments`.`pid` = `politicians`.`pid`;' %
         article[0])
         contains_list.append(c.fetchall())
 
-    return render_template('search_result.html', var = articles , contains = contains_list)
+    return render_template('search_result.html', var = articles , contains = contains_list, most_negative = most_negative_url, most_positive = most_positive_url,
+    most_negative_name = most_negative_name, most_positive_name = most_positive_name)
 
 app.run(host="0.0.0.0", debug=True)

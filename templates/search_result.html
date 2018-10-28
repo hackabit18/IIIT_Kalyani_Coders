@@ -374,16 +374,16 @@
           {% for article in var %}
           <div class="news-article">
               <div class="media-house">
-                <a href="/mediahouse/{{ article[4] }}" style="text-decoration: underline;">{{ article[-1] }}</a>
+                <a href="/mediahouse/{{ article[4] }}" style="text-decoration: underline;">{{ article[-2] }}</a>
               </div>
               <div class="title">
                 <a href="{{ article[1] }}">{{ article[2] }}</a>
               </div>
-              {% if article[-3] == 'bias'%}
+              {% if article[-4] == 'bias'%}
               <div class="title-tags red-tag">
                 Biased
               </div>
-              {% elif article[-3] == 'impartial' %}
+              {% elif article[-4] == 'impartial' %}
               <div class="title-tags green-tag">
                   Impartial
               </div>
@@ -392,11 +392,11 @@
                   Unsure
               </div>
               {% endif %}
-              {% if article[-2] == 'bias'%}
+              {% if article[-3] == 'bias'%}
               <div class="content-tags red-tag">
                 Biased
               </div>
-              {% elif article[-2] == 'impartial' %}
+              {% elif article[-3] == 'impartial' %}
               <div class="content-tags green-tag">
                   Impartial
               </div>
@@ -421,6 +421,25 @@
                 </div>
               {% endif %}
               {% if count.append(count.pop() + 1) %}{% endif %}
+
+              {% if article[-4] == 'bias' or article[-3] == 'bias' %}
+                {% if article[-1] > 0.05 %}
+                  {% if most_negative|string != "" and most_negative_name != article[2] %}
+                    <br><br>To get a different perspective, you may try <br>
+                    <div class="title">
+                      <a href="{{ most_negative }}">{{ most_negative_name }}</a>
+                    </div>  
+                  {% endif %}
+                {% endif %}
+                {% if article[-1] < 0.05 %}
+                  {% if most_positive|string != "" and most_positive_name != article[2] %}
+                    <br><br>To get a different perspective, you may try <br>
+                    <div class="title">
+                      <a href="{{ most_positive }}">{{ most_positive_name }}</a>
+                    </div> 
+                  {% endif %}
+                {% endif %}
+              {% endif %}
           <!--   <div class="greyblue-tag">
                 Narendra Modi
               </div>
@@ -433,8 +452,8 @@
           <div id="overlay" class="white-overlay" style="">
             <a href="{{ url_for('trending') }}">Latest</a>
             <a href="/analyse">Analyse by URL</a>
-            <a>Media Houses</a>
-            <a>Politicians</a>
+           <!-- <a>Media Houses</a>
+            <a>Politicians</a> -->
             <a href="/search">Search</a>
             <a style="background: #204584; color: white;" href="javascript:void(0)" onclick="document.querySelector('#overlay').style.display = 'none';">Close</a>
 
