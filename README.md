@@ -1,6 +1,6 @@
 # FOR HACK-A-BIT HACKATHON 2018 
 
-<b>News Aggregator That Helps Mitigate Effect of Media Bias on Users.</b>
+## News Aggregator That Helps Mitigate Effect of Media Bias on Users.
 
 <b>6th highest ranked hack at HACK-A-BIT 2018. I was part of the only single-memeber team selected for HACK-A-BIT 2018. </b> 
 
