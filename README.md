@@ -1,12 +1,21 @@
-# IIIT_Kalyani_Coders
+# FOR HACK-A-BIT HACKATHON 2018 
 
-## Idea
-Modern News Aggregator that uses Machine Learning and Natural Language Processing to mitigate media bias.
+## News Aggregator That Helps Mitigate Effect of Media Bias on Users.
 
-## Used components
+<b>6th highest ranked hack at HACK-A-BIT 2018. I was part of the only single-memeber team selected for HACK-A-BIT 2018. </b> 
+
+## Description
+For HACK-A-BIT Hackathon 2018, I created a News Aggregator that uses Machine Learning model to check news articles for biased content. It furthur, utilises sentiment analysis to understand the type of bias - 'positive' or 'negative'. Any news search made through the app, returns news articles along with their classification, and if a certain news article is biased, the app provides the user, a link to another news article providing a different perspective. The app also offers functionality to analyse news article by URL. 
+
+## Screenshot
+See Latest News | Search News by Topic | Analyse by URL
+--- | --- | ---
+<img src="static/img/WhatsApp%20Image%202018-10-29%20at%202.18.15%20PM%20(1).jpeg" width="250" border="5"> | <img src="static/img/WhatsApp%20Image%202018-10-29%20at%202.18.30%20PM%20(2).jpeg" width="250"> | <img src="static/img/WhatsApp%20Image%202018-10-29%20at%202.18.30%20PM%20(3).jpeg" width="250">
+
+## Libraries/Tools Used
 1. Flask
 1. requests
-1. NTLK
+1. NLTK
 1. TextBlob
 1. FakeBox
 1. requests-html
@@ -18,13 +27,5 @@ Modern News Aggregator that uses Machine Learning and Natural Language Processin
 1. HTML
 1. CSS
 
-## Description
-I created a Progressive Web App that provides News Aggregation and Browsing facilites. Where it differs from other news aggregator is it's use of ML and NLP, to reduce effect of media bias on user, prompting user to make rational choices.
-
-### Features
-1.  Rating news articles on bias, using Naive Bayes Classifier and Sentiment Analysis.
-1.  Rating news articles on bias of their treatment of personalities.
-1.  Suggestion engine that promotes Aspect/Perspective level Browsing of news articles.
-
 ## Copyright
-(c) Anubhav Dinesh Patel. The software is open sourced with MIT License.
+&copy; 2018-Present Anubhav Dinesh Patel. This software is open sourced with MIT License.
